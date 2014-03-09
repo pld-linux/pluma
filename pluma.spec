@@ -1,12 +1,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
-Name:		mate-text-editor
-Version:	1.6.2
+Name:		pluma
+Version:	1.8.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	518869ea16bafd951dac0ab3947c99af
+Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
+# Source0-md5:	cdebd8c3e32bb4624354f2b435fecc23
 Patch0:		%{name}-python.patch
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
@@ -23,7 +23,6 @@ BuildRequires:	iso-codes >= 0.35
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
-BuildRequires:	mate-doc-utils >= 0.9.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-gtksourceview2-devel >= 2.9.2
@@ -33,6 +32,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	enchant >= 1.2.0
 Requires:	glib2 >= 1:2.26.0
@@ -44,6 +44,7 @@ Requires:	python-gtksourceview2 >= 2.9.2
 Requires:	python-pygobject >= 2.15.4
 Requires:	python-pygtk-gtk >= 2:2.12.0
 Requires:	xorg-lib-libSM >= 1.0.0
+Obsoletes:	mate-text-editor
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -88,7 +89,6 @@ Dokumentacja API edytora Pluma.
 
 %build
 mate-doc-common --copy
-mate-doc-prepare --copy --force
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
@@ -112,6 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 # mate < 1.5 did not exist in PLD, avoid dependency on mate-conf
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/pluma.convert
 
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
+
 %find_lang pluma --with-mate --with-omf
 
 %clean
@@ -126,7 +128,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f pluma.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/mate-text-editor
 %attr(755,root,root) %{_bindir}/pluma
 %dir %{_libdir}/pluma
 %attr(755,root,root) %{_libdir}/pluma/pluma-bugreport.sh
