@@ -2,7 +2,7 @@ Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
 Version:	1.8.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
@@ -53,9 +53,8 @@ environment. Based on gedit, the text editor for the GNOME 2
 environment.
 
 %description -l pl.UTF-8
-Pluma to mały i lekki edytor tekstu w UTF-8 dla środowiska MATE.
-Jest oparty na programie gedit - edytorze tekstu dla środowiska GNOME
-2.
+Pluma to mały i lekki edytor tekstu w UTF-8 dla środowiska MATE. Jest
+oparty na programie gedit - edytorze tekstu dla środowiska GNOME 2.
 
 %package devel
 Summary:	Header files for Pluma plugins development
@@ -76,6 +75,9 @@ Pliki nagłówkowe do tworzenia wtyczek edytora Pluma.
 Summary:	Pluma API documentation
 Summary(pl.UTF-8):	Dokumentacja API edytora Pluma
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 Pluma API documentation.
