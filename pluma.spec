@@ -9,12 +9,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.8.1
-Release:	2
+Version:	1.10.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	21da09ecd167e2799f89f396cfd8efeb
+Source0:	http://pub.mate-desktop.org/releases/1.10/%{name}-%{version}.tar.xz
+# Source0-md5:	6714329177e6dbe49a9ef7fb759f65f8
 Patch0:		%{name}-python.patch
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
@@ -22,8 +22,8 @@ BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.2.0
 BuildRequires:	gettext-tools >= 0.17
-BuildRequires:	glib2-devel >= 1:2.32.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.20}
+BuildRequires:	glib2-devel >= 1:2.36.0
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	gtk-doc >= 1.0
 %{!?with_gtk3:BuildRequires:	gtksourceview2-devel >= 2.9.7}
@@ -34,6 +34,7 @@ BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
+BuildRequires:	mate-desktop-devel >= 1.9.0
 BuildRequires:	pkgconfig
 %if %{with python}
 BuildRequires:	python-devel >= 1:2.5
@@ -46,15 +47,16 @@ BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	yelp-tools
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	enchant >= 1.2.0
-Requires:	glib2 >= 1:2.32.0
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.20}
+Requires:	glib2 >= 1:2.36.0
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
 %{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 %{!?with_gtk3:Requires:	gtksourceview2 >= 2.9.7}
 %{?with_gtk3:Requires:	gtksourceview3 >= 3.0}
 Requires:	iso-codes >= 0.35
 Requires:	libxml2 >= 1:2.5.0
+Requires:	mate-desktop-libs >= 1.9.0
 %if %{with python}
 Requires:	python-gtksourceview2 >= 2.9.2
 Requires:	python-pygobject >= 2.15.4
@@ -78,8 +80,8 @@ Summary:	Header files for Pluma plugins development
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek edytora Pluma
 Group:		X11/Development/Libraries
 # doesn't require base
-Requires:	glib2-devel >= 1:2.32.0
-%{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.20}
+Requires:	glib2-devel >= 1:2.36.0
+%{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:Requires:	gtk+3-devel >= 3.0.0}
 %{!?with_gtk3:Requires:	gtksourceview2-devel >= 2.9.7}
 %{?with_gtk3:Requires:	gtksourceview3-devel >= 3.0}
@@ -186,6 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pluma/plugins/snippets
 %{_libdir}/pluma/plugins/snippets.pluma-plugin
 %endif
+%{_datadir}/appdata/pluma.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.filebrowser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.time.gschema.xml
