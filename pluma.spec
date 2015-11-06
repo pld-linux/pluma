@@ -9,12 +9,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.10.2
+Version:	1.12.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.10/%{name}-%{version}.tar.xz
-# Source0-md5:	a3897d8bec30d8ddb19efc17902fae7d
+Source0:	http://pub.mate-desktop.org/releases/1.12/%{name}-%{version}.tar.xz
+# Source0-md5:	ca6f617883a2946d22193bb06df97878
 Patch0:		%{name}-python.patch
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
@@ -28,7 +28,7 @@ BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gtk-doc >= 1.0
 %{!?with_gtk3:BuildRequires:	gtksourceview2-devel >= 2.9.7}
 %{?with_gtk3:BuildRequires:	gtksourceview3-devel >= 3.0}
-BuildRequires:	intltool >= 0.40.0
+BuildRequires:	intltool >= 0.50.1
 BuildRequires:	iso-codes >= 0.35
 BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libtool >= 2:2.2.6
@@ -177,6 +177,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pluma/plugins/taglist.pluma-plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libtime.so
 %{_libdir}/pluma/plugins/time.pluma-plugin
+%attr(755,root,root) %{_libdir}/pluma/plugins/libtrailsave.so
+%{_libdir}/pluma/plugins/trailsave.pluma-plugin
 %if %{with python}
 # Python plugins
 %{_libdir}/pluma/plugins/externaltools
