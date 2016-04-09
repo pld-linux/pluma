@@ -9,12 +9,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.12.2
+Version:	1.14.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.12/%{name}-%{version}.tar.xz
-# Source0-md5:	38fc942958a81c93eff678ca3e102bc4
+Source0:	http://pub.mate-desktop.org/releases/1.14/%{name}-%{version}.tar.xz
+# Source0-md5:	8386579dac1e16a4d93dfc5f668a206e
 Patch0:		%{name}-python.patch
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
@@ -134,9 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/{plugin-loaders,plugins}/*.la
 
-# mate < 1.5 did not exist in PLD, avoid dependency on mate-conf
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/pluma.convert
-
 %find_lang pluma --with-mate
 
 %clean
@@ -193,6 +190,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/appdata/pluma.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.filebrowser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.spell.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.time.gschema.xml
 %{_datadir}/pluma
 %{_desktopdir}/pluma.desktop
