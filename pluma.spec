@@ -9,12 +9,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.14.1
+Version:	1.16.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.14/%{name}-%{version}.tar.xz
-# Source0-md5:	34a5fe722671121c2d3bfddb6a7f9e2d
+Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
+# Source0-md5:	0c171f4892db34688938777e359834db
 Patch0:		%{name}-python.patch
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
@@ -34,7 +34,6 @@ BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
-BuildRequires:	mate-desktop-devel >= 1.9.0
 BuildRequires:	pkgconfig
 %if %{with python}
 BuildRequires:	python-devel >= 1:2.5
@@ -56,7 +55,6 @@ Requires:	glib2 >= 1:2.36.0
 %{?with_gtk3:Requires:	gtksourceview3 >= 3.0}
 Requires:	iso-codes >= 0.35
 Requires:	libxml2 >= 1:2.5.0
-Requires:	mate-desktop-libs >= 1.9.0
 %if %{with python}
 Requires:	python-gtksourceview2 >= 2.9.2
 Requires:	python-pygobject >= 2.15.4
