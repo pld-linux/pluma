@@ -1,21 +1,12 @@
-#
-# Conditional build:
-%bcond_with	gtk3		# use GTK+ 3.x instead of 2.x (disables python)
-%bcond_without	python		# Python support
-
-%if %{with gtk3}
-%undefine	with_python
-%endif
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.16.0
+Version:	1.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
-# Source0-md5:	0c171f4892db34688938777e359834db
-Patch0:		%{name}-python.patch
+Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
+# Source0-md5:	9cdf5c1a54ffb3d7626726f6c66ce842
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
@@ -23,24 +14,22 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.2.0
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
+BuildRequires:	gtk+3-devel >= 3.14
 BuildRequires:	gtk-doc >= 1.0
-%{!?with_gtk3:BuildRequires:	gtksourceview2-devel >= 2.9.7}
-%{?with_gtk3:BuildRequires:	gtksourceview3-devel >= 3.0}
+BuildRequires:	gtksourceview3-devel >= 3.0
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	iso-codes >= 0.35
+BuildRequires:	libpeas-devel >= 1.2.0
+BuildRequires:	libpeas-gtk-devel >= 1.2.0
 BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig
-%if %{with python}
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-gtksourceview2-devel >= 2.9.2
 BuildRequires:	python-pygobject-devel >= 2.15.4
 BuildRequires:	python-pygtk-devel >= 2:2.12.0
-%endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
@@ -49,17 +38,15 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	enchant >= 1.2.0
 Requires:	glib2 >= 1:2.36.0
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
-%{!?with_gtk3:Requires:	gtksourceview2 >= 2.9.7}
-%{?with_gtk3:Requires:	gtksourceview3 >= 3.0}
+Requires:	gtk+3 >= 3.14
+Requires:	gtksourceview3 >= 3.0
 Requires:	iso-codes >= 0.35
+Requires:	libpeas >= 1.2.0
+Requires:	libpeas-gtk >= 1.2.0
 Requires:	libxml2 >= 1:2.5.0
-%if %{with python}
 Requires:	python-gtksourceview2 >= 2.9.2
 Requires:	python-pygobject >= 2.15.4
 Requires:	python-pygtk-gtk >= 2:2.12.0
-%endif
 Requires:	xorg-lib-libSM >= 1.0.0
 Obsoletes:	mate-text-editor
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -79,10 +66,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek edytora Pluma
 Group:		X11/Development/Libraries
 # doesn't require base
 Requires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3-devel >= 3.0.0}
-%{!?with_gtk3:Requires:	gtksourceview2-devel >= 2.9.7}
-%{?with_gtk3:Requires:	gtksourceview3-devel >= 3.0}
+Requires:	gtk+3-devel >= 3.14
+Requires:	gtksourceview3-devel >= 3.0
 
 %description devel
 Header files for Pluma plugins development.
@@ -106,7 +91,6 @@ Dokumentacja API edytora Pluma.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 mate-doc-common --copy
@@ -117,10 +101,8 @@ mate-doc-common --copy
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_python:--disable-python} \
 	--disable-schemas-compile \
 	--disable-silent-rules \
-	%{?with_gtk3:--with-gtk=3.0} \
 	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
@@ -130,8 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/{plugin-loaders,plugins}/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pms
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ku_IQ,pms}
 
 %find_lang pluma --with-mate
 
@@ -150,42 +132,36 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pluma
 %dir %{_libdir}/pluma
 %attr(755,root,root) %{_libdir}/pluma/pluma-bugreport.sh
-%dir %{_libdir}/pluma/plugin-loaders
-%attr(755,root,root) %{_libdir}/pluma/plugin-loaders/libcloader.so
-%if %{with python}
-%attr(755,root,root) %{_libdir}/pluma/plugin-loaders/libpythonloader.so
-%endif
 %dir %{_libdir}/pluma/plugins
 # C plugins
 %attr(755,root,root) %{_libdir}/pluma/plugins/libchangecase.so
-%{_libdir}/pluma/plugins/changecase.pluma-plugin
+%{_libdir}/pluma/plugins/changecase.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libdocinfo.so
-%{_libdir}/pluma/plugins/docinfo.pluma-plugin
+%{_libdir}/pluma/plugins/docinfo.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libfilebrowser.so
-%{_libdir}/pluma/plugins/filebrowser.pluma-plugin
+%{_libdir}/pluma/plugins/filebrowser.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libmodelines.so
-%{_libdir}/pluma/plugins/modelines.pluma-plugin
+%{_libdir}/pluma/plugins/modelines.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libsort.so
-%{_libdir}/pluma/plugins/sort.pluma-plugin
+%{_libdir}/pluma/plugins/sort.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libspell.so
-%{_libdir}/pluma/plugins/spell.pluma-plugin
+%{_libdir}/pluma/plugins/spell.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libtaglist.so
-%{_libdir}/pluma/plugins/taglist.pluma-plugin
+%{_libdir}/pluma/plugins/taglist.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libtime.so
-%{_libdir}/pluma/plugins/time.pluma-plugin
-%attr(755,root,root) %{_libdir}/pluma/plugins/libtrailsave.so
-%{_libdir}/pluma/plugins/trailsave.pluma-plugin
-%if %{with python}
+%{_libdir}/pluma/plugins/time.plugin
 # Python plugins
 %{_libdir}/pluma/plugins/externaltools
-%{_libdir}/pluma/plugins/externaltools.pluma-plugin
+%{_libdir}/pluma/plugins/externaltools.plugin
 %{_libdir}/pluma/plugins/pythonconsole
-%{_libdir}/pluma/plugins/pythonconsole.pluma-plugin
+%{_libdir}/pluma/plugins/pythonconsole.plugin
 %{_libdir}/pluma/plugins/quickopen
-%{_libdir}/pluma/plugins/quickopen.pluma-plugin
+%{_libdir}/pluma/plugins/quickopen.plugin
 %{_libdir}/pluma/plugins/snippets
-%{_libdir}/pluma/plugins/snippets.pluma-plugin
-%endif
+%{_libdir}/pluma/plugins/snippets.plugin
+%attr(755,root,root) %{_libdir}/pluma/plugins/libtrailsave.so
+%{_libdir}/pluma/plugins/trailsave.plugin
+%{_libdir}/girepository-1.0/Pluma-1.0.typelib
 %{_datadir}/appdata/pluma.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.filebrowser.gschema.xml
@@ -199,6 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/pluma
 %{_pkgconfigdir}/pluma.pc
+%{_datadir}/gir-1.0/Pluma-1.0.gir
 
 %files apidocs
 %defattr(644,root,root,755)
