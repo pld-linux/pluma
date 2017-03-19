@@ -2,7 +2,7 @@ Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
 Version:	1.18.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
@@ -14,6 +14,7 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.2.0
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	gobject-introspection-devel >= 0.9.3
 BuildRequires:	gtk+3-devel >= 3.14
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gtksourceview3-devel >= 3.0
@@ -26,10 +27,7 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.5
-BuildRequires:	python-gtksourceview2-devel >= 2.9.2
-BuildRequires:	python-pygobject-devel >= 2.15.4
-BuildRequires:	python-pygtk-devel >= 2:2.12.0
+BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
@@ -38,14 +36,15 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	enchant >= 1.2.0
 Requires:	glib2 >= 1:2.36.0
+Requires:	gobject-introspection >= 0.9.3
 Requires:	gtk+3 >= 3.14
 Requires:	gtksourceview3 >= 3.0
 Requires:	iso-codes >= 0.35
 Requires:	libpeas >= 1.2.0
 Requires:	libpeas-gtk >= 1.2.0
 Requires:	libxml2 >= 1:2.5.0
-Requires:	python-gtksourceview2 >= 2.9.2
-Requires:	python-pygobject >= 2.15.4
+Requires:	python-pygobject3 >= 3.0
+# for pythonconsole.config
 Requires:	python-pygtk-gtk >= 2:2.12.0
 Requires:	xorg-lib-libSM >= 1.0.0
 Obsoletes:	mate-text-editor
@@ -150,6 +149,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pluma/plugins/taglist.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libtime.so
 %{_libdir}/pluma/plugins/time.plugin
+%attr(755,root,root) %{_libdir}/pluma/plugins/libtrailsave.so
+%{_libdir}/pluma/plugins/trailsave.plugin
 # Python plugins
 %{_libdir}/pluma/plugins/externaltools
 %{_libdir}/pluma/plugins/externaltools.plugin
@@ -159,8 +160,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pluma/plugins/quickopen.plugin
 %{_libdir}/pluma/plugins/snippets
 %{_libdir}/pluma/plugins/snippets.plugin
-%attr(755,root,root) %{_libdir}/pluma/plugins/libtrailsave.so
-%{_libdir}/pluma/plugins/trailsave.plugin
 %{_libdir}/girepository-1.0/Pluma-1.0.typelib
 %{_datadir}/appdata/pluma.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.gschema.xml
