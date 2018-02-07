@@ -1,21 +1,21 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.18.3
+Version:	1.20.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	2813e0371d20da51d9e24eab527eb8be
+Source0:	http://pub.mate-desktop.org/releases/1.20/%{name}-%{version}.tar.xz
+# Source0-md5:	b6ebfaf3becab0e2f7f0c1370ec3b85d
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.2.0
 BuildRequires:	gettext-tools >= 0.17
-BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gobject-introspection-devel >= 0.9.3
-BuildRequires:	gtk+3-devel >= 3.14
+BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gtksourceview3-devel >= 3.0
 BuildRequires:	intltool >= 0.50.1
@@ -33,11 +33,11 @@ BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	yelp-tools
-Requires(post,postun):	glib2 >= 1:2.36.0
+Requires(post,postun):	glib2 >= 1:2.50.0
 Requires:	enchant >= 1.2.0
-Requires:	glib2 >= 1:2.36.0
+Requires:	glib2 >= 1:2.50.0
 Requires:	gobject-introspection >= 0.9.3
-Requires:	gtk+3 >= 3.14
+Requires:	gtk+3 >= 3.22
 Requires:	gtksourceview3 >= 3.0
 Requires:	iso-codes >= 0.35
 Requires:	libpeas >= 1.2.0
@@ -64,8 +64,8 @@ Summary:	Header files for Pluma plugins development
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek edytora Pluma
 Group:		X11/Development/Libraries
 # doesn't require base
-Requires:	glib2-devel >= 1:2.36.0
-Requires:	gtk+3-devel >= 3.14
+Requires:	glib2-devel >= 1:2.50.0
+Requires:	gtk+3-devel >= 3.22
 Requires:	gtksourceview3-devel >= 3.0
 
 %description devel
@@ -112,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ku_IQ,pms}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ku_IQ,jv,pms}
 
 %find_lang pluma --with-mate
 
@@ -129,8 +129,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/pluma
+%dir %{_libexecdir}/pluma
+%attr(755,root,root) %{_libexecdir}/pluma/pluma-bugreport.sh
 %dir %{_libdir}/pluma
-%attr(755,root,root) %{_libdir}/pluma/pluma-bugreport.sh
 %dir %{_libdir}/pluma/plugins
 # C plugins
 %attr(755,root,root) %{_libdir}/pluma/plugins/libchangecase.so
