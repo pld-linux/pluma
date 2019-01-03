@@ -130,7 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/pluma
+%if "%{_libexecdir}" != "%{_libdir}"
 %dir %{_libexecdir}/pluma
+%endif
 %attr(755,root,root) %{_libexecdir}/pluma/pluma-bugreport.sh
 %dir %{_libdir}/pluma
 %dir %{_libdir}/pluma/plugins
