@@ -1,17 +1,17 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.20.4
+Version:	1.22.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.20/%{name}-%{version}.tar.xz
-# Source0-md5:	bdb892ddf61c6f7f2644ee3e8f638ce3
+Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
+# Source0-md5:	a8346299099efeea12498c9d541b0ec4
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	enchant-devel >= 1.2.0
+BuildRequires:	enchant-devel >= 1.6.0
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gobject-introspection-devel >= 0.9.3
@@ -34,7 +34,7 @@ BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.50.0
-Requires:	enchant >= 1.2.0
+Requires:	enchant >= 1.6.0
 Requires:	glib2 >= 1:2.50.0
 Requires:	gobject-introspection >= 0.9.3
 Requires:	gtk+3 >= 3.22
@@ -112,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ku_IQ,jv,pms}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ,jv,pms}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{es_AR,frp,ku_IQ}
 
 %find_lang pluma --with-mate
