@@ -11,7 +11,7 @@ URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	enchant-devel >= 1.6.0
+BuildRequires:	enchant2-devel >= 2
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gobject-introspection-devel >= 0.9.3
@@ -34,7 +34,6 @@ BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.50.0
-Requires:	enchant >= 1.6.0
 Requires:	glib2 >= 1:2.50.0
 Requires:	gobject-introspection >= 0.9.3
 Requires:	gtk+3 >= 3.22
@@ -113,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ,jv,pms}
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{es_AR,frp,ku_IQ}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{frp,ku_IQ}
 
 %find_lang pluma --with-mate
 
