@@ -1,12 +1,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.22.1
+Version:	1.22.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	1ea409cecc6f07c42c9a591cbe23ae9e
+# Source0-md5:	6640ba0e2a38be4aa3039a08b3d5afef
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
@@ -111,8 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ,jv,pms}
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{frp,ku_IQ}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ie,jv,ku_IQ,pms}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{frp,ie,ku_IQ}
 
 %find_lang pluma --with-mate
 
