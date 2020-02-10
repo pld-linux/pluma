@@ -1,24 +1,23 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.22.2
+Version:	1.24.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	6640ba0e2a38be4aa3039a08b3d5afef
+Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
+# Source0-md5:	d03bae1d454b33cb4d65aa8070c9509c
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant2-devel >= 2
-BuildRequires:	gettext-tools >= 0.17
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gobject-introspection-devel >= 0.9.3
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gtksourceview3-devel >= 3.0
-BuildRequires:	intltool >= 0.50.1
 BuildRequires:	iso-codes >= 0.35
 BuildRequires:	libpeas-devel >= 1.2.0
 BuildRequires:	libpeas-gtk-devel >= 1.2.0
@@ -27,9 +26,10 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
+BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	yelp-tools
@@ -42,9 +42,7 @@ Requires:	iso-codes >= 0.35
 Requires:	libpeas >= 1.2.0
 Requires:	libpeas-gtk >= 1.2.0
 Requires:	libxml2 >= 1:2.5.0
-Requires:	python-pygobject3 >= 3.0
-# for pythonconsole.config
-Requires:	python-pygtk-gtk >= 2:2.12.0
+Requires:	python3-pygobject3 >= 3.0
 Requires:	xorg-lib-libSM >= 1.0.0
 Obsoletes:	mate-text-editor
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -90,9 +88,10 @@ Dokumentacja API edytora Pluma.
 %prep
 %setup -q
 
+%{__sed} -i -e '1s|#!/usr/bin/python$|#!%{__python3}|' plugins/externaltools/data/switch-c.tool.in
+
 %build
 mate-doc-common --copy
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
@@ -167,6 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/metainfo/pluma.appdata.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.filebrowser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.pythonconsole.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.spell.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.pluma.plugins.time.gschema.xml
 %{_datadir}/pluma
