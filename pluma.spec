@@ -1,12 +1,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.24.0
+Version:	1.24.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	d03bae1d454b33cb4d65aa8070c9509c
+# Source0-md5:	bc86093be357f1bd35d7f9b9c0f0f108
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
