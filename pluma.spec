@@ -75,9 +75,7 @@ Pliki nagłówkowe do tworzenia wtyczek edytora Pluma.
 Summary:	Pluma API documentation
 Summary(pl.UTF-8):	Dokumentacja API edytora Pluma
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 Pluma API documentation.
