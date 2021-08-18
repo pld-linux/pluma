@@ -1,12 +1,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.24.2
+Version:	1.26.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	https://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	e32f671ee80165ddd3ac6310b73b27fa
+Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
+# Source0-md5:	3d1dff6ae00d576574ef9a6308d6034b
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
@@ -17,7 +17,7 @@ BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gobject-introspection-devel >= 0.9.3
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.0
-BuildRequires:	gtksourceview3-devel >= 3.0
+BuildRequires:	gtksourceview4-devel >= 4.0.2
 BuildRequires:	iso-codes >= 0.35
 BuildRequires:	libpeas-devel >= 1.2.0
 BuildRequires:	libpeas-gtk-devel >= 1.2.0
@@ -31,6 +31,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libICE-devel >= 1.0.0
 BuildRequires:	xorg-lib-libSM-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
@@ -39,7 +40,7 @@ Requires(post,postun):	glib2 >= 1:2.50.0
 Requires:	glib2 >= 1:2.50.0
 Requires:	gobject-introspection >= 0.9.3
 Requires:	gtk+3 >= 3.22
-Requires:	gtksourceview3 >= 3.0
+Requires:	gtksourceview4 >= 4.0.2
 Requires:	iso-codes >= 0.35
 Requires:	libpeas >= 1.2.0
 Requires:	libpeas-gtk >= 1.2.0
@@ -65,7 +66,7 @@ Group:		X11/Development/Libraries
 # doesn't require base
 Requires:	glib2-devel >= 1:2.50.0
 Requires:	gtk+3-devel >= 3.22
-Requires:	gtksourceview3-devel >= 3.0
+Requires:	gtksourceview4-devel >= 4.0.2
 
 %description devel
 Header files for Pluma plugins development.
@@ -89,6 +90,8 @@ Dokumentacja API edytora Pluma.
 %setup -q
 
 %{__sed} -i -e '1s|#!/usr/bin/python$|#!%{__python3}|' plugins/externaltools/data/switch-c.tool.in
+
+grep -lr '#!/usr/bin/sh' . | xargs %{__sed} -i -e '1 s,#!/usr/bin/sh,#!/bin/sh,'
 
 %build
 mate-doc-common --copy
@@ -126,7 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f pluma.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog NEWS README.md
 %attr(755,root,root) %{_bindir}/pluma
 %if "%{_libexecdir}" != "%{_libdir}"
 %dir %{_libexecdir}/pluma
@@ -135,8 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/pluma
 %dir %{_libdir}/pluma/plugins
 # C plugins
-%attr(755,root,root) %{_libdir}/pluma/plugins/libchangecase.so
-%{_libdir}/pluma/plugins/changecase.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libdocinfo.so
 %{_libdir}/pluma/plugins/docinfo.plugin
 %attr(755,root,root) %{_libdir}/pluma/plugins/libfilebrowser.so
