@@ -7,7 +7,7 @@ License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
 # Source0-md5:	3d1dff6ae00d576574ef9a6308d6034b
-URL:		http://mate-desktop.org/
+URL:		https://wiki.mate-desktop.org/mate-desktop/applications/pluma/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
@@ -29,6 +29,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
+BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libICE-devel >= 1.0.0
