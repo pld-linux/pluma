@@ -28,6 +28,7 @@ BuildRequires:	mate-common
 BuildRequires:	pkgconfig
 BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sed >= 4.0
@@ -48,7 +49,7 @@ Requires:	libpeas-gtk >= 1.2.0
 Requires:	libxml2 >= 1:2.5.0
 Requires:	python3-pygobject3 >= 3.0
 Requires:	xorg-lib-libSM >= 1.0.0
-Obsoletes:	mate-text-editor
+Obsoletes:	mate-text-editor < 1.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
