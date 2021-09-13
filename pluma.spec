@@ -2,7 +2,7 @@ Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
 Version:	1.26.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Editors
 Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
@@ -27,8 +27,8 @@ BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig
 BuildRequires:	python3-devel
-BuildRequires:	rpm-pythonprov
 BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sed >= 4.0
@@ -111,12 +111,15 @@ mate-doc-common --copy
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ie,jv,ku_IQ,pms}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/help/{frp,ie,ku_IQ}
+
+install -d $RPM_BUILD_ROOT%{_libdir}/pluma/plugins/__pycache__
 
 %find_lang pluma --with-mate
 
@@ -139,6 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/pluma/pluma-bugreport.sh
 %dir %{_libdir}/pluma
 %dir %{_libdir}/pluma/plugins
+%dir %{_libdir}/pluma/plugins/__pycache__
 # C plugins
 %attr(755,root,root) %{_libdir}/pluma/plugins/libdocinfo.so
 %{_libdir}/pluma/plugins/docinfo.plugin
