@@ -1,12 +1,12 @@
 Summary:	Pluma - MATE Text Editor
 Summary(pl.UTF-8):	Pluma - edytor tekstu dla środowiska MATE
 Name:		pluma
-Version:	1.26.2
+Version:	1.28.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Editors
-Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
-# Source0-md5:	22f27f3b9f2a5f27cf0a3ef3946d78a0
+Source0:	https://pub.mate-desktop.org/releases/1.28/%{name}-%{version}.tar.xz
+# Source0-md5:	046b64d4549b7561921fedbddbfe64af
 URL:		https://wiki.mate-desktop.org/mate-desktop/applications/pluma/
 BuildRequires:	autoconf >= 2.63.2
 BuildRequires:	automake >= 1:1.10
@@ -18,6 +18,7 @@ BuildRequires:	gobject-introspection-devel >= 0.9.3
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	gtksourceview4-devel >= 4.0.2
+# iso-639, iso-3166
 BuildRequires:	iso-codes >= 0.35
 BuildRequires:	libpeas-devel >= 1.2.0
 BuildRequires:	libpeas-gtk-devel >= 1.2.0
@@ -25,6 +26,7 @@ BuildRequires:	libsoup-devel >= 2.4
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	mate-common
+BuildRequires:	mate-desktop-devel >= 1.27.1
 BuildRequires:	pkgconfig
 BuildRequires:	python3-devel
 BuildRequires:	rpm-build >= 4.6
@@ -47,6 +49,7 @@ Requires:	iso-codes >= 0.35
 Requires:	libpeas >= 1.2.0
 Requires:	libpeas-gtk >= 1.2.0
 Requires:	libxml2 >= 1:2.5.0
+Requires:	mate-desktop >= 1.27.1
 Requires:	python3-pygobject3 >= 3.0
 Requires:	xorg-lib-libSM >= 1.0.0
 Obsoletes:	mate-text-editor < 1.8.0
